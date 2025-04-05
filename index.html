@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Pathyma Erno">
+    <meta name="description" content="Personal profile of Pathyma Erno, a CpE student, barista, and pasarela trainer">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pathyma's Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('ME.jpeg.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: rgba(36, 33, 33, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #bb9f7b;
+        }
+        .bio {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .contact-info {
+            background-color: #d4bcbc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .contact-info p {
+            font-weight: bold;
+            color: #473b63;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 5px solid #fff;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        a {
+            color: #bb9f7b;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+        #quote {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #f4a261;
+            margin-top: 20px;
+        }
+        .error-message, .success-message {
+            padding: 10px;
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .error-message {
+            background-color: #e74c3c;
+        }
+        .success-message {
+            background-color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Profile of Pathyma Erno</h1>
+</header>
+
+<div class="container">
+    <img src="patty closed eyes.jpeg.jpg" alt="Profile Picture" class="profile-pic"> 
+    <p>CpE Student | Barista | Pasarela Trainer</p>
+    <h2>About Me</h2>
+    <p class="bio">
+        Hi, I'm <strong>Pathyma Erno</strong>! I am a passionate Computer Engineering student with a love for coffee and fashion. I am currently working as a barista and have also been training others in the art of Pasarela (runway). I have a passion for discovering new things and am highly adaptive. I consider myself a people person.
+    </p>
+
+    <h2>Personal Details</h2>
+    <div class="details">
+        <p><strong>Age:</strong> 20</p>
+        <p><strong>Birthday:</strong> January 06, 2005</p>
+        <p><strong>Address:</strong> 265 Little Baguio St. Wawa III, Rosario Cavite</p>
+    </div>
+
+    <h2>Contact Information</h2>
+    <div class="contact-info">
+        <p><strong>Phone:</strong> 09637783572</p>
+        <p><strong>Email:</strong> <a href="mailto:pathymaerno@gmail.com">pathymaerno@gmail.com</a></p>
+    </div>
+
+    <!-- Motivational Quote Section -->
+    <div id="quote"></div>
+
+    <!-- "Download Resume" Button -->
+    <button onclick="downloadResume()">Download Resume</button>
+
+    <!-- Error/Success Messages -->
+    <div id="message-container"></div>
+
+</div>
+
+<footer>
+    <p>Thank you for visiting my profile!</p>
+</footer>
+
+<script>
+// Show an alert when the page loads
+window.onload = function() {
+    alert('Welcome to Pathyma Erno\'s Profile!');
+    fetchMotivationalQuote(); // Fetch and display a quote on load
+};
+
+// Function to fetch motivational quote
+function fetchMotivationalQuote() {
+    fetch('https://api.quotable.io/random')
+        .then(response => response.json())
+        .then(data => {
+            const quote = data.content;
+            document.getElementById('quote').textContent = `"${quote}"`;
+        })
+        .catch(error => {
+            document.getElementById('quote').textContent = "Feelings that has been established so swift woulf never be authentic";
+        });
+}
+
+// "Download Resume" functionality
+function downloadResume() {
+    const resumeUrl = 'PATHYMA ERNO.pdf'; // Replace with the actual resume URL
+    window.location.href = resumeUrl;
+}
+
+// Example: Form validation and error/success message handling
+function handleFormSubmission(event) {
+    event.preventDefault();
+    
+    const nameInput = document.getElementById('name').value;
+    
+    if (nameInput === '') {
+        showMessage('Please enter your name.', 'error');
+    } else {
+        showMessage('Form submitted successfully!', 'success');
+    }
+}
+
+// Show success or error messages
+function showMessage(message, type) {
+    const messageContainer = document.getElementById('message-container');
+    const messageElement = document.createElement('div');
+    
+    messageElement.classList.add(type === 'error' ? 'error-message' : 'success-message');
+    messageElement.textContent = message;
+    
+    messageContainer.innerHTML = ''; // Clear any previous messages
+    messageContainer.appendChild(messageElement);
+}
+</script>
+
+</body>
+</html>
